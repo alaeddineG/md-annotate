@@ -14,6 +14,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "build:mcp": "esbuild mcp-standalone.js --bundle --platform=node --format=esm --outfile=mcp-bridge.js && sed -i '' '1s|.*|#!/usr/bin/env node|' mcp-bridge.js",
     "preview": "vite preview",
     "start": "node bin/cli.js start"
   },
@@ -23,6 +24,7 @@
     "open": "^10.1.0"
   },
   "devDependencies": {
+    "esbuild": "^0.21.0",
     "@vitejs/plugin-react": "^4.3.0",
     "react": "^18.3.0",
     "react-dom": "^18.3.0",
