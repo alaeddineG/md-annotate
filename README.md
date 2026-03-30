@@ -5,10 +5,10 @@ A shared markdown review surface between Claude (via MCP) and humans (via browse
 ## How it works
 
 ```
-┌─────────────┐    MCP tools     ┌──────────────┐    Browser UI    ┌─────────────┐
-│   Claude     │ ──────────────► │  md-annotate  │ ◄────────────── │    Human     │
-│  (or any AI) │ ◄────────────── │    daemon     │ ──────────────► │  (reviewer)  │
-└─────────────┘  push / read     └──────────────┘  annotate / view └─────────────┘
+┌──────────────┐    MCP tools     ┌────────────────┐    Browser UI    ┌──────────────┐
+│   Claude     │ ──────────────►  │   md-annotate  │ ◄──────────────  │    Human     │
+│  (or any AI) │ ◄──────────────  │      daemon    │ ──────────────►  │  (reviewer)  │
+└──────────────┘  push / read     └────────────────┘  annotate / view └──────────────┘
 ```
 
 1. **Claude pushes** a markdown document via the `md_push` MCP tool
