@@ -1,8 +1,8 @@
 import { useState } from 'react';
+import { Button } from '@primer/react';
 
 function buildPrompt(doc, annotations) {
   const sorted = [...annotations].sort((a, b) => a.startLine - b.startLine);
-
   const lines = [
     `Please revise the following document based on the annotations below.`,
     ``,
@@ -31,7 +31,7 @@ function buildPrompt(doc, annotations) {
     }
     lines.push(`**Feedback:** ${ann.comment}`);
     if (ann.stale) {
-      lines.push(`> ⚠️ Note: This annotation was made on a previous revision. The source at these lines may have changed.`);
+      lines.push(`> ⚠️ Note: This annotation was made on a previous revision.`);
     }
     lines.push(``);
   });
@@ -39,7 +39,6 @@ function buildPrompt(doc, annotations) {
   lines.push(`---`);
   lines.push(``);
   lines.push(`After applying all feedback, push the revised document using \`md_push\` with documentId \`${doc.documentId}\`.`);
-
   return lines.join('\n');
 }
 
@@ -54,15 +53,15 @@ export default function PromptGenerator({ doc, annotations, onClose }) {
   }
 
   return (
-    <div className="modal-overlay" onClick={e => e.target === e.currentTarget && onClose()}>
+    <div className="modal-backdrop" onClick={e => e.target === e.currentTarget && onClose()}>
       <div className="modal">
         <div className="modal-header">
           <span>Revision Prompt</span>
-          <div className="modal-actions">
-            <button className="btn btn-primary btn-sm" onClick={copy}>
+          <div className="modal-header-actions">
+            <Button size="small" variant="primary" onClick={copy}>
               {copied ? 'Copied!' : 'Copy'}
-            </button>
-            <button className="btn btn-sm" onClick={onClose}>Close</button>
+            </Button>
+            <Button size="small" onClick={onClose}>Close</Button>
           </div>
         </div>
         <pre className="modal-body">{prompt}</pre>
