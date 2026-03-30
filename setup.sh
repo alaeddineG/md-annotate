@@ -2,7 +2,8 @@
 set -e
 
 REPO_DIR="$(cd "$(dirname "$0")" && pwd)"
-BRIDGE_DEST="/Users/aladdin/.mcp_servers/md-annotate/mcp-bridge.js"
+BRIDGE_DIR="$HOME/.mcp_servers/md-annotate"
+BRIDGE_DEST="$BRIDGE_DIR/mcp-bridge.js"
 
 echo "==> Stopping daemon..."
 node "$REPO_DIR/bin/cli.js" stop 2>/dev/null || true
@@ -24,6 +25,7 @@ echo "==> Building MCP bridge..."
 npm run build:mcp
 
 echo "==> Copying bridge to $BRIDGE_DEST..."
+mkdir -p "$BRIDGE_DIR"
 cp "$REPO_DIR/mcp-bridge.js" "$BRIDGE_DEST"
 
 echo "==> Starting daemon..."
