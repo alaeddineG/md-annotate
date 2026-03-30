@@ -33,14 +33,16 @@ npm start
 # → http://localhost:4242
 ```
 
-Or use the setup script (macOS/Linux) which handles everything including the MCP bridge:
+Or use the setup script which handles everything including the MCP bridge:
 
 ```bash
+# macOS / Linux
 chmod +x setup.sh
 ./setup.sh
-```
 
-**Windows** users: run the equivalent steps manually — `npm install`, `npm run build`, `npm run build:mcp`, then copy `mcp-bridge.js` to your preferred location.
+# Windows (PowerShell)
+.\setup.ps1
+```
 
 ## MCP integration
 
@@ -142,7 +144,8 @@ md-annotate/
 │       ├── ModeToggle.jsx       # Raw/Preview toggle
 │       └── PromptGenerator.jsx  # Generate revision prompt from annotations
 ├── mcp-standalone.js     # Entry point for standalone MCP bridge
-└── setup.sh              # Full setup script
+├── setup.sh              # Setup script (macOS/Linux)
+└── setup.ps1             # Setup script (Windows)
 ```
 
 **Storage:** Documents and annotations are persisted as JSON files under `~/.md-annotate/documents/`.
