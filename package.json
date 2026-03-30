@@ -38,5 +38,17 @@
   "engines": {
     "node": ">=18"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/alaeddineG/md-annotate.git"
+  },
+  "keywords": [
+    "markdown",
+    "annotation",
+    "review",
+    "mcp",
+    "claude",
+    "model-context-protocol"
+  ]
 }
