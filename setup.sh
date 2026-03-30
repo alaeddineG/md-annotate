@@ -9,7 +9,13 @@ echo "==> Stopping daemon..."
 node "$REPO_DIR/bin/cli.js" stop 2>/dev/null || true
 
 echo "==> Killing anything on port 4242..."
-lsof -ti :4242 | xargs kill -9 2>/dev/null || true
+if command -v lsof &>/dev/null; then
+  lsof -ti :4242 | xargs kill -9 2>/dev/null || true
+elif command -v fuser &>/dev/null; then
+  fuser -k 4242/tcp 2>/dev/null || true
+else
+  echo "   (skipped — install lsof or fuser to auto-kill port 4242)"
+fi
 
 echo "==> Removing node_modules..."
 rm -rf "$REPO_DIR/node_modules"

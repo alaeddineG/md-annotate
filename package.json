@@ -14,7 +14,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "build:mcp": "esbuild mcp-standalone.js --bundle --platform=node --format=esm --outfile=mcp-bridge.js && sed -i '' '1s|.*|#!/usr/bin/env node|' mcp-bridge.js",
+    "build:mcp": "esbuild mcp-standalone.js --bundle --platform=node --format=esm --outfile=mcp-bridge.js && node -e \"const f='mcp-bridge.js';let s=require('fs').readFileSync(f,'utf8');s=s.replace(/^#!.*\\n/,'');require('fs').writeFileSync(f,'#!/usr/bin/env node\\n'+s)\"",
     "preview": "vite preview",
     "start": "node bin/cli.js start"
   },

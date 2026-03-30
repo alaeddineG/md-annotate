@@ -5,10 +5,11 @@ A shared markdown review surface between Claude (via MCP) and humans (via browse
 ## How it works
 
 ```
-┌──────────────┐    MCP tools     ┌────────────────┐    Browser UI    ┌──────────────┐
-│   Claude     │ ──────────────►  │   md-annotate  │ ◄──────────────  │    Human     │
-│  (or any AI) │ ◄──────────────  │      daemon    │ ──────────────►  │  (reviewer)  │
-└──────────────┘  push / read     └────────────────┘  annotate / view └──────────────┘
+┌────────────────┐                ┌────────────────┐                ┌────────────────┐
+│     Claude     │   MCP tools    │  md-annotate   │  Browser UI    │     Human      │
+│   (or any AI)  │ ══════════════>│     daemon     │<══════════════ │   (reviewer)   │
+│                │ <══════════════│                │ ══════════════>│                │
+└────────────────┘  push / read   └────────────────┘ annotate/view  └────────────────┘
 ```
 
 1. **Claude pushes** a markdown document via the `md_push` MCP tool
@@ -32,12 +33,14 @@ npm start
 # → http://localhost:4242
 ```
 
-Or use the setup script which handles everything including the MCP bridge:
+Or use the setup script (macOS/Linux) which handles everything including the MCP bridge:
 
 ```bash
 chmod +x setup.sh
 ./setup.sh
 ```
+
+**Windows** users: run the equivalent steps manually — `npm install`, `npm run build`, `npm run build:mcp`, then copy `mcp-bridge.js` to your preferred location.
 
 ## MCP integration
 
@@ -155,6 +158,10 @@ npm run dev
 # In another terminal, start the daemon
 node server/daemon.js
 ```
+
+## Platform support
+
+Works on **macOS**, **Linux**, and **Windows**. The daemon, CLI, and MCP bridge are pure Node.js with no native dependencies. The `setup.sh` script is bash-only (macOS/Linux) — on Windows, run the steps manually or use WSL.
 
 ## Requirements
 
